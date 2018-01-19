@@ -2,9 +2,9 @@ import '../stylesheets/style.scss';
 
 const fetch = (url, cb, err) => {
   const xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4) {
-      if (this.status == 200) {
+  xhttp.onreadystatechange = () => {
+    if (this.readyState === 4) {
+      if (this.status === 200) {
         cb(xhttp.responseText);
       } else {
         typeof err === 'function' && err(xhttp);
@@ -34,7 +34,7 @@ const castVotes = actorList => {
   })
 }
 
-const fixData = compose(castVotes, get('data'), JSON.parse)
+const onReceiveJson = compose(votesIntoPercentage, castVotes, get('data'), JSON.parse)
 
-fetch("https://raw.githubusercontent.com/r7com/frontend-test/master/public/fazenda.json", fixData, console.error)
+fetch("https://raw.githubusercontent.com/r7com/frontend-test/master/public/fazenda.json", onReceiveJson, console.error)
 
