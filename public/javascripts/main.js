@@ -1,3 +1,5 @@
+import '../stylesheets/style.scss';
+
 const fetch = (url, cb, err) => {
   const xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function ready() {
@@ -74,7 +76,22 @@ export const comparePositive = (a, b) => {
 export const sort = fn => arr => arr.sort(fn);
 
 const render = (actorList) => {
-  debugger;
+  let counter = 0;
+  actorList.forEach((actor) => {
+    counter++;
+    const list = document.getElementById('list');
+    const item = document.createElement('li');
+    item.className = 'widget__item';
+    item.innerHTML = `
+      <div class="widget__img-wrapper">
+        <figure class="widget__img-holder" style="background-image: url(${actor.picture})">
+          <img class="widget__img" alt="foto de ${actor.name}" src="${actor.picture}" />
+        </figure>
+        <div class="widget__counter">${counter}</div>
+      </div>
+    `;
+    list.appendChild(item);
+  });
   return actorList;
 };
 
