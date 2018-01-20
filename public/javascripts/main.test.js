@@ -1,4 +1,4 @@
-import { comparePositive, votesIntoPercentage, castActorVotes, percentBetweenTwo } from './main'
+import { sort, comparePositive, votesIntoPercentage, castActorVotes, percentBetweenTwo } from './main'
 
 describe("percentBetweenTwo", () => {
   it('should calc percentage of difference', () => {
@@ -86,14 +86,14 @@ describe("votesIntoPercentage", () => {
 });
 
 describe("comparePositive", () => {
-  it("should return 1 when positive is higher", () => {
+  it("should return -1 when positive is higher", () => {
     const positiveHigher = {
       positive: 2
     }
     const positiveLower = {
       positive: -2
     }
-    expect(comparePositive(positiveHigher, positiveLower)).toBe(1)
+    expect(comparePositive(positiveHigher, positiveLower)).toBe(-1)
   })
   it("should return 0 when both are the same", () => {
     const val1 = {
@@ -104,13 +104,31 @@ describe("comparePositive", () => {
     }
     expect(comparePositive(val1, val2)).toBe(0)
   })
-  it("should return -1 when positive is lower", () => {
+  it("should return 1 when positive is lower", () => {
     const positiveLower = {
       positive: -2
     }
     const positiveHigher = {
       positive: 2
     }
-    expect(comparePositive(positiveLower, positiveHigher)).toBe(-1)
+    expect(comparePositive(positiveLower, positiveHigher)).toBe(1)
+  })
+})
+
+describe("sort", () => {
+  it('should sort a array of objects based on "positive" attribute', () => {
+    const unsorted = [{
+      positive: 1
+    },
+    {
+      positive: 2
+    }]
+    const expected = [{
+      positive: 2
+    },
+    {
+      positive: 1
+    }]
+    expect(sort(comparePositive)(unsorted)).toEqual(expected)
   })
 })

@@ -62,19 +62,29 @@ export const votesIntoPercentage = data => data.map((actor) => {
 });
 
 export const comparePositive = (a, b) => {
-  if(a.positive === b.positive) {
-    return 0
-  } else if(a.positive > b.positive) {
-    return 1
-  } else if(a.positive < b.positive) {
-    return -1
+  if (a.positive > b.positive) {
+    return -1;
   }
-  throw 'comparePositive receive a unknown value'
+  if (a.positive < b.positive) {
+    return 1;
+  }
+  return 0;
 };
 
 export const sort = fn => arr => arr.sort(fn);
 
-const onReceiveJson = compose(votesIntoPercentage, castActorList, get('data'), JSON.parse);
+const render = (actorList) => {
+  debugger;
+  return actorList;
+};
 
-fetch('https://raw.githubusercontent.com/r7com/frontend-test/master/public/fazenda.json', onReceiveJson, console.error);
+const onReceiveJson = compose(render, sort(comparePositive), votesIntoPercentage, castActorList, get('data'), JSON.parse);
+
+const onError = (data) => {
+  debugger;
+  return data;
+};
+
+// TODO: use json from project folder
+fetch('https://raw.githubusercontent.com/r7com/frontend-test/master/public/fazenda.json', onReceiveJson, onError);
 
