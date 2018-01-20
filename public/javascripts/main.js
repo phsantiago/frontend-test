@@ -61,7 +61,16 @@ export const votesIntoPercentage = data => data.map((actor) => {
   return transformedActor;
 });
 
-export const comparePositive = (a, b) => b;
+export const comparePositive = (a, b) => {
+  if(a.positive === b.positive) {
+    return 0
+  } else if(a.positive > b.positive) {
+    return 1
+  } else if(a.positive < b.positive) {
+    return -1
+  }
+  throw 'comparePositive receive a unknown value'
+};
 
 export const sort = fn => arr => arr.sort(fn);
 

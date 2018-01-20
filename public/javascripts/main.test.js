@@ -86,7 +86,31 @@ describe("votesIntoPercentage", () => {
 });
 
 describe("comparePositive", () => {
-  it("should return 1 when positive is bigger", () => {
-    expect(comparePositive(2,1)).toBe(1)
+  it("should return 1 when positive is higher", () => {
+    const positiveHigher = {
+      positive: 2
+    }
+    const positiveLower = {
+      positive: -2
+    }
+    expect(comparePositive(positiveHigher, positiveLower)).toBe(1)
+  })
+  it("should return 0 when both are the same", () => {
+    const val1 = {
+      positive: 111
+    }
+    const val2 = {
+      positive: 111
+    }
+    expect(comparePositive(val1, val2)).toBe(0)
+  })
+  it("should return -1 when positive is lower", () => {
+    const positiveLower = {
+      positive: -2
+    }
+    const positiveHigher = {
+      positive: 2
+    }
+    expect(comparePositive(positiveLower, positiveHigher)).toBe(-1)
   })
 })
