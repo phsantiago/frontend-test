@@ -69,6 +69,10 @@ module.exports = {
     new webpack.optimize.ModuleConcatenationPlugin(),
     new CopyWebpackPlugin([
       { from: 'public/fazenda.json' },
-    ])
+    ]),
+    new webpack.EnvironmentPlugin(['NODE_ENV', 'DEBUG']),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    })
   ],
 };
