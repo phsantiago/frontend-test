@@ -66,12 +66,16 @@
 ## Features bonus
 
 * Idependencia do app. Caso caia a conexão ou aconteça algum erro de backend o front tem uma resposta visual para isso, causando melhor experiencia de uso.
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png)
+
+![alt text](https://github.com/phsantiago/frontend-test/blob/PedroSantiago/docs/request_error.gif)
 
 * Mobile first, foi desenvolvido primeiro para a menor resolução possível de um dispositivo, as medias queries ficaram para telas maiores.
 
-* Carregamento, em conexões que possuem maior lentidão o app da uma resposta visual.
+![alt text](https://github.com/phsantiago/frontend-test/blob/PedroSantiago/docs/media_queries.gif)
 
+* Em conexões que possuem maior lentidão é possível notar uma resposta visual enquanto a requisição do json não é recebida.
+
+![alt text](https://github.com/phsantiago/frontend-test/blob/PedroSantiago/docs/loading.gif)
 
 
 ### Sobre o R7.com
