@@ -77,6 +77,7 @@
 
 ![alt text](https://github.com/phsantiago/frontend-test/blob/PedroSantiago/docs/loading.gif)
 
+---
 
 ### Sobre o R7.com
 O R7.com é um portal mantido pela Record TV, com quase 9 anos de vida. Possui mais de 50 milhões de visitantes únicos e 200 milhões de pageviews mensalmente e conta coma uma equipe de quase 300 pessoas.
