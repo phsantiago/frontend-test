@@ -1,26 +1,6 @@
 import '../stylesheets/style.scss';
-
-const fetch = (url, cb, err) => {
-  const xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function ready() {
-    if (this.readyState === 4) {
-      if (this.status === 200) {
-        cb(xhttp.responseText);
-      } else if (typeof err === 'function') {
-        err(xhttp);
-      }
-    }
-  };
-  xhttp.open('GET', url, true);
-  xhttp.send();
-};
-
-const get = key => obj => obj[key];
-
-const compose = (...args) => initial => args.reduceRight(
-  (result, fn) => fn(result),
-  initial,
-);
+import { fetch, percent } from './utils/helpful';
+import { compose, get, sort, compareKey } from './utils/functional';
 
 export const castActorVotes = (actor) => {
   const castedActor = actor;
@@ -44,39 +24,17 @@ export const castActorVotes = (actor) => {
 
 const castActorList = actorList => actorList.map(castActorVotes);
 
-export const percentBetweenTwo = (a, b) => {
-  if (a === b) {
-    return 0;
-  } else if (a > b) {
-    return (b * 100) / a;
-  }
-  return (a * 100) / b;
-};
-
 export const votesIntoPercentage = data => data.map((actor) => {
   const { positive, negative } = actor;
   const total = positive + negative;
   const transformedActor = actor;
 
-  transformedActor.positive = percentBetweenTwo(positive, total);
-  transformedActor.negative = percentBetweenTwo(negative, total);
+  transformedActor.positive = percent(positive, total);
+  transformedActor.negative = percent(negative, total);
   return transformedActor;
 });
 
-export const comparePositive = (a, b) => {
-  if (a.positive > b.positive) {
-    return -1;
-  }
-  if (a.positive < b.positive) {
-    return 1;
-  }
-  return 0;
-};
-
-export const sort = fn => arr => arr.sort(fn);
-
 const render = (actorList) => {
-  let counter = 0;
   const list = document.getElementById('list');
   list.innerHTML = `
     <li id="js-lightoff" style="
@@ -88,10 +46,11 @@ const render = (actorList) => {
       bottom: 0;
       background-color: #00000082;
       z-index: 2;
-    "></li>
+    " role="presentation" aria-hidden="true"></li>
   `;
+  let counter = 0;
   actorList.forEach((actor) => {
-    counter++;
+    counter += 1;
     const item = document.createElement('li');
     item.className = 'widget__item';
     item.setAttribute('itemtype', 'http://schema.org/ItemList http://schema.org/Person');
@@ -130,31 +89,36 @@ const render = (actorList) => {
 
     list.appendChild(item);
 
-    const $elem = document.getElementById("js-lightoff")
-    const listToHover = document.getElementsByClassName('widget__item')
-    for( let i=0; i <= listToHover.length; i++ ){
-      if(typeof listToHover[i] !== 'undefined') {
+    // used in hover effect for small devices
+    const $elem = document.getElementById('js-lightoff');
+    const listToHover = document.getElementsByClassName('widget__item');
+
+    // listToHover its an HTMLCollection, should be itareted this way
+    for (let i = 0; i <= listToHover.length; i += 1) {
+      if (typeof listToHover[i] !== 'undefined') {
         listToHover[i].addEventListener('mouseover', () => {
-          if(window.innerWidth < 580) {
-            $elem.style.display = 'block'
+          if (window.innerWidth < 580) {
+            $elem.style.display = 'block';
           }
-        })
+        });
         listToHover[i].addEventListener('mouseout', () => {
-          $elem.style.display = 'none'
-        })
+          $elem.style.display = 'none';
+        });
       }
     }
   });
   return actorList;
 };
 
-const onReceiveJson = compose(render, sort(comparePositive), votesIntoPercentage, castActorList, get('data'), JSON.parse);
-
 const onError = (data) => {
-  debugger;
+  const list = document.getElementById('list');
+  list.innerHTML = `
+    <h3 class="widget__error">Ocorreu um erro durante o carregamento, tente novamente mais tarde.</h3>
+  `;
   return data;
 };
 
+const onReceiveJson = compose(render, sort(compareKey('positive')), votesIntoPercentage, castActorList, get('data'), JSON.parse);
 // TODO: use json from project folder
 fetch('https://raw.githubusercontent.com/r7com/frontend-test/master/public/fazenda.json', onReceiveJson, onError);
 
