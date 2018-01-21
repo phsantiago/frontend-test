@@ -24,6 +24,35 @@ body {
   font-family: 'Montserrat', sans-serif;
   background-color: #272727;
 }
+.spinner {
+  width: 90px;
+  height: 90px;
+  margin: 100px auto;
+  background-color: $wine;
+
+  border-radius: 100%;
+  -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
+  animation: sk-scaleout 1.0s infinite ease-in-out;
+}
+
+@-webkit-keyframes sk-scaleout {
+  0% { -webkit-transform: scale(0) }
+  100% {
+    -webkit-transform: scale(1.0);
+    opacity: 0;
+  }
+}
+
+@keyframes sk-scaleout {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 100% {
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+    opacity: 0;
+  }
+}
 .widget {
   &__logo {
     position: relative;
@@ -59,6 +88,12 @@ body {
     border-radius: 3px;
     position: relative;
     min-height: 459px;
+    background-color: #fff;
+    overflow: auto;
+  }
+  &__error {
+    padding: 20px 50px;
+    text-align: center;
   }
   &__item {
     display: flex;
@@ -213,6 +248,9 @@ body {
   @media screen and (min-width: 580px) {
     width: 390px;
     margin: 0;
+    &__list {
+      overflow: visible;
+    }
     &__votes-wrapper {
       right: -170px;
       left: auto;
