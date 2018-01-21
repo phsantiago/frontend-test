@@ -1,13 +1,15 @@
-import { sort, comparePositive, votesIntoPercentage, castActorVotes, percentBetweenTwo } from './main'
+import { votesIntoPercentage, castActorVotes } from './main'
+import { sort, compareKey } from './utils/functional';
+import { percent } from './utils/helpful';
 
-describe("percentBetweenTwo", () => {
+describe("percent", () => {
   it('should calc percentage of difference', () => {
-    expect(percentBetweenTwo(100,10)).toBe(10);
-    expect(percentBetweenTwo(20,10)).toBe(50);
-    expect(percentBetweenTwo(5,10)).toBe(50);
+    expect(percent(100,10)).toBe(10);
+    expect(percent(20,10)).toBe(50);
+    expect(percent(5,10)).toBe(50);
   })
   it('should return 0 when there is no difference', () => {
-    expect(percentBetweenTwo(100,100)).toBe(0);
+    expect(percent(100,100)).toBe(0);
   })
 })
 
@@ -93,7 +95,7 @@ describe("comparePositive", () => {
     const positiveLower = {
       positive: -2
     }
-    expect(comparePositive(positiveHigher, positiveLower)).toBe(-1)
+    expect(compareKey("positive")(positiveHigher, positiveLower)).toBe(-1)
   })
   it("should return 0 when both are the same", () => {
     const val1 = {
@@ -102,7 +104,7 @@ describe("comparePositive", () => {
     const val2 = {
       positive: 111
     }
-    expect(comparePositive(val1, val2)).toBe(0)
+    expect(compareKey("positive")(val1, val2)).toBe(0)
   })
   it("should return 1 when positive is lower", () => {
     const positiveLower = {
@@ -111,7 +113,7 @@ describe("comparePositive", () => {
     const positiveHigher = {
       positive: 2
     }
-    expect(comparePositive(positiveLower, positiveHigher)).toBe(1)
+    expect(compareKey("positive")(positiveLower, positiveHigher)).toBe(1)
   })
 })
 
@@ -129,6 +131,6 @@ describe("sort", () => {
     {
       positive: 1
     }]
-    expect(sort(comparePositive)(unsorted)).toEqual(expected)
+    expect(sort(compareKey("positive"))(unsorted)).toEqual(expected)
   })
 })
