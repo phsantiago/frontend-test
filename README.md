@@ -60,7 +60,7 @@
 
 3. Performance
    
-   **No build de produção configurei scope hoisting, tree shaking, minificação de css, minificação de javascript e compactação de html. Por não ter dependencias o bundle ficou 6.3kb :)**
+   **No build de produção configurei scope hoisting, tree shaking, minificação de css, minificação de javascript e compactação de html. Por não ter dependencias o bundle ficou 4.29kb :)**
 
 
 ## Features bonus
