@@ -77,9 +77,21 @@ export const sort = fn => arr => arr.sort(fn);
 
 const render = (actorList) => {
   let counter = 0;
+  const list = document.getElementById('list');
+  list.innerHTML = `
+    <li id="js-lightoff" style="
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #00000082;
+      z-index: 2;
+    "></li>
+  `;
   actorList.forEach((actor) => {
     counter++;
-    const list = document.getElementById('list');
     const item = document.createElement('li');
     item.className = 'widget__item';
     item.setAttribute('itemtype', 'http://schema.org/ItemList http://schema.org/Person');
@@ -114,7 +126,24 @@ const render = (actorList) => {
         </div>
       </div>
     `;
+
+
     list.appendChild(item);
+
+    const $elem = document.getElementById("js-lightoff")
+    const listToHover = document.getElementsByClassName('widget__item')
+    for( let i=0; i <= listToHover.length; i++ ){
+      if(typeof listToHover[i] !== 'undefined') {
+        listToHover[i].addEventListener('mouseover', () => {
+          if(window.innerWidth < 580) {
+            $elem.style.display = 'block'
+          }
+        })
+        listToHover[i].addEventListener('mouseout', () => {
+          $elem.style.display = 'none'
+        })
+      }
+    }
   });
   return actorList;
 };
