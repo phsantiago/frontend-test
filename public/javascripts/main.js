@@ -120,5 +120,5 @@ const onError = (data) => {
 
 const onReceiveJson = compose(render, sort(compareKey('positive')), votesIntoPercentage, castActorList, get('data'), JSON.parse);
 // TODO: use json from project folder
-fetch('https://raw.githubusercontent.com/r7com/frontend-test/master/public/fazenda.json', onReceiveJson, onError);
+fetch('/fazenda.json', onReceiveJson, onError);
 
