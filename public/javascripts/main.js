@@ -82,12 +82,18 @@ const render = (actorList) => {
     const list = document.getElementById('list');
     const item = document.createElement('li');
     item.className = 'widget__item';
+    item.setAttribute('itemtype', 'http://schema.org/ItemList http://schema.org/Person');
+    item.setAttribute('itemscope', '');
     item.innerHTML = `
       <div class="widget__img-wrapper">
         <figure class="widget__img-holder" style="background-image: url(${actor.picture})">
           <img class="widget__img" alt="foto de ${actor.name}" src="${actor.picture}" />
         </figure>
-        <div class="widget__counter">${counter}</div>
+        <div class="widget__counter" itemprop="position">${counter}</div>
+      </div>
+      <div class="widget__actor-info">
+        <div class="widget__actor-name" itemprop="name">${actor.name}</div>
+        <div class="widget__actor-desc">${actor.description}</div>
       </div>
     `;
     list.appendChild(item);
