@@ -9,8 +9,10 @@ export const fetch = (url, cb, err) => {
       }
     }
   };
-  xhttp.open('GET', url, true);
-  xhttp.send();
+  if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'production') {
+    xhttp.open('GET', url, true);
+    xhttp.send();
+  }
 };
 
 export const percent = (a, b) => {

@@ -98,7 +98,8 @@ body {
     position: relative;
     min-height: 459px;
     background-color: #fff;
-    overflow: auto;
+    overflow: visible;
+    overflow-y: auto;
   }
 
   &__error {
@@ -285,10 +286,6 @@ body {
   @media screen and (min-width: 580px) {
     width: 390px;
     margin: 0;
-
-    &__list {
-      overflow: visible;
-    }
 
     &__votes-wrapper {
       right: -170px;
