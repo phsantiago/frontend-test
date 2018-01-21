@@ -22,6 +22,8 @@ body {
     font-size: 30px;
     font-weight: 600;
     margin-left: auto;
+    border-radius: 3px;
+    overflow: hidden;
   }
   &__img-holder {
     height: 60px;
@@ -39,15 +41,19 @@ body {
   &__list {
     padding: 0;
     text-align: left;
+    border-radius: 3px;
+    overflow: hidden;
   }
   &__item {
     display: flex;
+    position: relative;
     background-color: #fff;
     align-items: center;
-    padding: 10px 15px;
+    padding: 15px;
     transition: background-color 200ms linear;
     &:nth-child(even) {
       background-color: #f2f1f1;
+      padding: 10px 15px;
     }
     &:hover {
       background-color: $wine;
@@ -90,10 +96,48 @@ body {
   &__actor-desc {
     padding-top: 3px;
   }
+  &__votes-wrapper {
+    position: absolute;
+    left: 50%;
+    bottom: -70px;
+    z-index: 1;
+    width: 155px;
+    margin-left: -75px;
+    background-color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  &__votes-head {
+    background-color: #ba3638;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  &__positive {
+    width: 40%;
+    display: inline-block;
+    padding: 7px 0;
+    box-shadow: 1px 0px 0px rgba(113, 113, 113, 0.57), 2px 0px 0px rgba(193, 193, 193, 0.4);
+  }
+  &__negative {
+    display: inline-block;
+    width: 57%;
+    padding: 7px 0;
+  }
+  &__vote-perc {
+    font-weight: bolder;
+    font-size: 24px;
+    padding: 0;
+    color: $gray;
+  }
   @media screen and (min-width: 390px) {
     &__head {
       position: relative;
-      height: 186px;
+      height: 180px;
+    }
+    &__list {
+      margin: 15px 0 15px 32px;
     }
     &__logo {
       position: absolute;
@@ -109,5 +153,9 @@ body {
       margin: 0;
       z-index: -1;
     }
+  }
+  @media screen and (min-width: 450px) {
+    width: 390px;
+    margin: 0 auto;
   }
 }

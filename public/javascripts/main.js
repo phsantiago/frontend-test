@@ -95,6 +95,24 @@ const render = (actorList) => {
         <div class="widget__actor-name" itemprop="name">${actor.name}</div>
         <div class="widget__actor-desc">${actor.description}</div>
       </div>
+      <div class="widget__votes-wrapper">
+        <div class="widget__votes-head">
+          <div class="widget__positive">
+            GOSTAM
+          </div>
+          <div class="widget__negative">
+            NÃO GOSTAM
+          </div>
+        </div>
+        <div class="widget__stats-content">
+          <div class="widget__vote-perc widget__positive">
+            ${Math.round(actor.positive)}%
+          </div>
+          <div class="widget__vote-perc widget__negative">
+            ${Math.round(actor.negative)}%
+          </div>
+        </div>
+      </div>
     `;
     list.appendChild(item);
   });
