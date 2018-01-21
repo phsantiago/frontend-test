@@ -2,7 +2,11 @@
   "name": "R7FrontendTest",
   "version": "0.0.1",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "serve": "webpack-dev-server",
+    "lint": "eslint",
+    "test": "jest",
+    "build": "NODE_ENV=production webpack --config=webpack.prod.js"
   },
   "dependencies": {
     "connect": "~3.1.1",
@@ -29,6 +33,7 @@
     "regenerator-runtime": "^0.11.1",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.1",
+    "stylelint-config-standard": "^18.0.0",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.0"
   },
