@@ -99,7 +99,8 @@ body {
     min-height: 459px;
     background-color: #fff;
     overflow: visible;
-    overflow-y: auto;
+    display: inline-block;
+    width: 100%;
   }
 
   &__error {
@@ -259,6 +260,7 @@ body {
 
     &__list {
       margin: 15px 0 15px 32px;
+      width: 92%;
     }
 
     &__logo {
@@ -286,6 +288,10 @@ body {
   @media screen and (min-width: 580px) {
     width: 390px;
     margin: 0;
+
+    &__list {
+      width: 358px;
+    }
 
     &__votes-wrapper {
       right: -170px;
