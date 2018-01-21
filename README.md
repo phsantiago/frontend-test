@@ -63,7 +63,7 @@
    **No build de produção configurei scope hoisting, tree shaking, minificação de css, minificação de javascript e compactação de html. Por não ter dependencias o bundle ficou 4.29kb :)**
 
 
-## Features bonus
+## Bonus features
 
 * Idependencia do app. Caso caia a conexão ou aconteça algum erro de backend o front tem uma resposta visual para isso, causando melhor experiencia de uso.
 
